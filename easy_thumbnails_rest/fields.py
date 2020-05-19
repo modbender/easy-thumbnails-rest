@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework.serializers import ImageField, JSONField
 
-__all__ = ('ThumbnailerField', 'ThumbnailerListField')
+__all__ = ('ThumbnailerSerializer', 'ThumbnailerListSerializer')
 
 THUMBNAIL_ALIASES = getattr(settings, 'THUMBNAIL_ALIASES', {})
 
@@ -14,21 +14,21 @@ def image_sizes(request, image, alias_obj, alias_key):
         'original': request.build_absolute_uri(image.url)
     }
 
-class ThumbnailerField(ImageField):
+class ThumbnailerSerializer(ImageField):
     def __init__(self, **kwargs):
         self.alias = kwargs.pop('alias', '')
-        super(ThumbnailerField, self).__init__(**kwargs)
+        super(ThumbnailerSerializer, self).__init__(**kwargs)
 
     def to_representation(self, instance):
         if self.alias:
             return self.context['request'].build_absolute_uri(instance[self.alias].url)
         return super().to_representation(instance)
 
-class ThumbnailerListField(JSONField):
+class ThumbnailerListSerializer(JSONField):
     def __init__(self, **kwargs):
         self.alias = kwargs.pop('alias', None)
         self.alias_obj = kwargs.pop('alias_obj', THUMBNAIL_ALIASES)
-        super(ThumbnailerListField, self).__init__(**kwargs)
+        super(ThumbnailerListSerializer, self).__init__(**kwargs)
 
     def to_representation(self, instance):
         if self.alias or self.alias == '':
