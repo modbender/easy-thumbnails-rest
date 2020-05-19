@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name='easy_thumbnails_rest',
+    name='easy-thumbnails-rest',
     version='1.0',
     url='https://github.com/yashas123/easy-thumbnails-rest',
     description='Easy Thumbnails Fields for Django Rest API',
