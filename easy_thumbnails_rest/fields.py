@@ -1,6 +1,5 @@
 from django.conf import settings
 from rest_framework.serializers import ImageField, JSONField
-from easy_thumbnails.files import get_thumbnailer
 
 __all__ = ('ThumbnailerField', 'ThumbnailerListField')
 
