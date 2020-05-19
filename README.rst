@@ -52,7 +52,7 @@ Example:
 ::
 
     from rest_framework import serializers
-    from easy_thumbnails_rest.fields import ThumbnailerSerializer
+    from easy_thumbnails_rest.serializers import ThumbnailerSerializer
 
     class ExampleSerializer(serializers.ModelSerializer):
         image = ThumbnailerSerializer(alias='avatar')
@@ -75,7 +75,7 @@ Example:
 ::
 
     from rest_framework import serializers
-    from easy_thumbnails_rest.fields import ThumbnailerListSerializer
+    from easy_thumbnails_rest.serializers import ThumbnailerListSerializer
 
     class ExampleSerializer(serializers.ModelSerializer):
         image = ThumbnailerListSerializer(alias='')
