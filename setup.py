@@ -5,7 +5,7 @@ setuptools.setup(
     version='1.0',
     url='https://github.com/yashas123/easy-thumbnails-rest',
     description='Easy Thumbnails Fields for Django Rest API',
-    long_description='Easy Thumbnails Fields for Django Rest API Framework',
+    long_description=open('README.md').read(),
     author='Yashas H R',
     author_email='rameshmamathayashas@gmail.com',
     install_requires=[
