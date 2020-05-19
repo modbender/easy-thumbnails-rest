@@ -9,14 +9,14 @@ Installation
 
 Run ``pip install easy-thumbnails-rest``.
 
-Add ``easy_thumbnails_rest`` to ``INSTALLED_APPS``
+**[OPTIONAL]** Add ``easy_thumbnails_rest`` to ``INSTALLED_APPS``
 
 ::
 
     INSTALLED_APPS = (
       ...
       'easy_thumbnails',
-      'easy_thumbnails_rest'
+      'easy_thumbnails_rest' #optional
     )
 
 Usage

@@ -6,4 +6,5 @@ docs/_build
 *.egg-info
 *.egg
 *.pyc
+*.bat
 reports/*
