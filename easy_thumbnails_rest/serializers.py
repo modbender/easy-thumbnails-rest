@@ -1,7 +1,8 @@
 from django.conf import settings
-from rest_framework.serializers import ImageField, JSONField
+from rest_framework.serializers import ImageField, ListField, JSONField
+from easy_thumbnails.fields import ThumbnailerField, ThumbnailerImageField
 
-__all__ = ('ThumbnailerSerializer', 'ThumbnailerListSerializer')
+__all__ = ('ThumbnailerSerializer', 'ThumbnailerListSerializer', 'ThumbnailerJSONSerializer')
 
 THUMBNAIL_ALIASES = getattr(settings, 'THUMBNAIL_ALIASES', {})
 
@@ -10,8 +11,8 @@ def image_sizes(request, image, alias_obj, alias_key):
         raise KeyError('Key %s not found in dict thumbnail aliases'%alias_key)
     i_sizes = alias_obj[alias_key].keys()
     return {
-        **{k: request.build_absolute_uri(image[k].url) for k in i_sizes},
-        'original': request.build_absolute_uri(image.url)
+        'original': request.build_absolute_uri(image.url),
+        **{k: request.build_absolute_uri(image[k].url) for k in i_sizes}
     }
 
 class ThumbnailerSerializer(ImageField):
@@ -24,11 +25,32 @@ class ThumbnailerSerializer(ImageField):
             return self.context['request'].build_absolute_uri(instance[self.alias].url)
         return super().to_representation(instance)
 
-class ThumbnailerListSerializer(JSONField):
+# class ThumbnailerFilterSerializer(ImageField):
+#     def __init__(self, **kwargs):
+#         self.alias = kwargs.pop('alias', '')
+#         super(ThumbnailerSerializer, self).__init__(**kwargs)
+#
+#     def to_representation(self, instance):
+#         if self.alias:
+#             return self.context['request'].build_absolute_uri(instance[self.alias].url)
+#         return super().to_representation(instance)
+
+class ThumbnailerListSerializer(ImageField):
     def __init__(self, **kwargs):
         self.alias = kwargs.pop('alias', None)
         self.alias_obj = kwargs.pop('alias_obj', THUMBNAIL_ALIASES)
         super(ThumbnailerListSerializer, self).__init__(**kwargs)
+
+    def to_representation(self, instance):
+        if self.alias or self.alias == '':
+            return list(image_sizes(self.context['request'], instance, self.alias_obj, self.alias).values())
+        return []
+
+class ThumbnailerJSONSerializer(ImageField):
+    def __init__(self, **kwargs):
+        self.alias = kwargs.pop('alias', None)
+        self.alias_obj = kwargs.pop('alias_obj', THUMBNAIL_ALIASES)
+        super(ThumbnailerJSONSerializer, self).__init__(**kwargs)
 
     def to_representation(self, instance):
         if self.alias or self.alias == '':

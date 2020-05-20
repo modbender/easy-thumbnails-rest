@@ -39,8 +39,9 @@ Example ``settings.THUMBNAIL_ALIASES``
 Fields:
 #######
 
--  ThumbnailerSerializer
--  ThumbnailerListSerializer
+- ThumbnailerSerializer
+- ThumbnailerListSerializer
+- ThumbnailerJSONSerializer (formerly ThumbnailerListSerializer)
 
 ThumbnailerSerializer
 *********************
@@ -66,7 +67,7 @@ From the above example the field ``image`` will contain string value of alias im
 ThumbnailerListSerializer
 *************************
 
-You can use ``ThumbnailerListSerializer`` to get image's predefined alias values list. You need to pass argument ``alias`` with value as one of the target's in ``THUMBNAIL_ALIASES``.
+You can use ``ThumbnailerListSerializer`` to get image's predefined alias image list. You need to pass argument ``alias`` with value as one of the target's in ``THUMBNAIL_ALIASES``.
 
 If you don't understand where to find target, please see the structure of the ``THUMBNAIL_ALIASES`` in `Easy Thumbnails Docs <https://easy-thumbnails.readthedocs.io/en/latest/usage/#thumbnail-aliases>`_
 
@@ -78,10 +79,33 @@ Example:
     from easy_thumbnails_rest.serializers import ThumbnailerListSerializer
 
     class ExampleSerializer(serializers.ModelSerializer):
-        image = ThumbnailerListSerializer(alias='')
+        image = ThumbnailerListSerializer(alias='target')
 
         class Meta:
             model = ExampleModel
             fields = '__all__'
 
-From the above example the field ``image`` will contain JSON value having all aliased image urls under a target.
+From the above example the field ``image`` will contain list of all aliased image urls under the given target.
+
+ThumbnailerJSONSerializer
+*************************
+
+You can use ``ThumbnailerJSONSerializer`` to get image's predefined alias image list. You need to pass argument ``alias`` with value as one of the target's in ``THUMBNAIL_ALIASES``.
+
+If you don't understand where to find target, please see the structure of the ``THUMBNAIL_ALIASES`` in `Easy Thumbnails Docs <https://easy-thumbnails.readthedocs.io/en/latest/usage/#thumbnail-aliases>`_
+
+Example:
+
+::
+
+    from rest_framework import serializers
+    from easy_thumbnails_rest.serializers import ThumbnailerJSONSerializer
+
+    class ExampleSerializer(serializers.ModelSerializer):
+        image = ThumbnailerJSONSerializer(alias='target')
+
+        class Meta:
+            model = ExampleModel
+            fields = '__all__'
+
+From the above example the field ``image`` will contain list of key-value pair where key's are the alias under the given target and values are the respective image url.
