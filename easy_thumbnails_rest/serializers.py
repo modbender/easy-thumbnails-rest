@@ -1,28 +1,41 @@
 from django.conf import settings
-from rest_framework.serializers import ImageField, ListField, JSONField
-from easy_thumbnails.fields import ThumbnailerField, ThumbnailerImageField
+from django.db.models import ImageField
+from rest_framework.serializers import ImageField as ApiImageField, ListField, JSONField
+from easy_thumbnails.files import ThumbnailerImageFieldFile, get_thumbnailer
 
 __all__ = ('ThumbnailerSerializer', 'ThumbnailerListSerializer', 'ThumbnailerJSONSerializer')
 
 THUMBNAIL_ALIASES = getattr(settings, 'THUMBNAIL_ALIASES', {})
 
-def image_sizes(request, image, alias_obj, alias_key):
+def get_url(request, instance, alias=None):
+    if alias is not None:
+        if isinstance(instance, ThumbnailerImageFieldFile):
+            return request.build_absolute_uri(instance[alias].url)
+        elif isinstance(instance, ImageField):
+            return request.build_absolute_uri(get_thumbnailer(instance)[alias].url)
+    elif alias is None:
+        return request.build_absolute_uri(instance.url)
+    else:
+        raise TypeError('Unsupported field type')
+
+def image_sizes(request, instance, alias_obj, alias_key):
     if alias_key not in alias_obj:
         raise KeyError('Key %s not found in dict thumbnail aliases'%alias_key)
-    i_sizes = alias_obj[alias_key].keys()
+    i_sizes = list(alias_obj[alias_key].keys())
     return {
-        'original': request.build_absolute_uri(image.url),
-        **{k: request.build_absolute_uri(image[k].url) for k in i_sizes}
+        'original': get_url(request, instance),
+        **{k: get_url(request, instance, k) for k in i_sizes}
     }
 
-class ThumbnailerSerializer(ImageField):
+class ThumbnailerSerializer(ApiImageField):
+
     def __init__(self, **kwargs):
-        self.alias = kwargs.pop('alias', '')
+        self.alias = kwargs.pop('alias', None)
         super(ThumbnailerSerializer, self).__init__(**kwargs)
 
     def to_representation(self, instance):
-        if self.alias:
-            return self.context['request'].build_absolute_uri(instance[self.alias].url)
+        if self.alias or self.alias == '':
+            return get_url(request, instance, self.alias)
         return super().to_representation(instance)
 
 # class ThumbnailerFilterSerializer(ImageField):
@@ -35,7 +48,8 @@ class ThumbnailerSerializer(ImageField):
 #             return self.context['request'].build_absolute_uri(instance[self.alias].url)
 #         return super().to_representation(instance)
 
-class ThumbnailerListSerializer(ImageField):
+class ThumbnailerListSerializer(ApiImageField):
+
     def __init__(self, **kwargs):
         self.alias = kwargs.pop('alias', None)
         self.alias_obj = kwargs.pop('alias_obj', THUMBNAIL_ALIASES)
@@ -46,7 +60,8 @@ class ThumbnailerListSerializer(ImageField):
             return list(image_sizes(self.context['request'], instance, self.alias_obj, self.alias).values())
         return []
 
-class ThumbnailerJSONSerializer(ImageField):
+class ThumbnailerJSONSerializer(ApiImageField):
+
     def __init__(self, **kwargs):
         self.alias = kwargs.pop('alias', None)
         self.alias_obj = kwargs.pop('alias_obj', THUMBNAIL_ALIASES)

@@ -22,7 +22,7 @@ Run ``pip install easy-thumbnails-rest``.
 Usage
 #####
 
-Remember that this app needs ``THUMBNAIL_ALIASES`` to be defined in ``settings.py`` and the field that you need to serialize should be of type ``ThumbnailerImageField`` (or ``ThumbnailerField``) to work.
+Remember that this app needs ``THUMBNAIL_ALIASES`` to be defined in ``settings.py``
 
 If not yet added, please check `Easy Thumbnails Docs <https://easy-thumbnails.readthedocs.io/en/latest/usage/#thumbnail-aliases>`_ to add it.
 
