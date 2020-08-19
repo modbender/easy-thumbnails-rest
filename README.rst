@@ -9,16 +9,6 @@ Installation
 
 Run ``pip install easy-thumbnails-rest``.
 
-**[OPTIONAL]** Add ``easy_thumbnails_rest`` to ``INSTALLED_APPS``
-
-::
-
-    INSTALLED_APPS = (
-      ...
-      'easy_thumbnails',
-      'easy_thumbnails_rest' #optional
-    )
-
 Usage
 #####
 
@@ -28,7 +18,7 @@ If not yet added, please check `Easy Thumbnails Docs <https://easy-thumbnails.re
 
 Example ``settings.THUMBNAIL_ALIASES``
 
-::
+.. code-block:: python
 
     THUMBNAIL_ALIASES = {
         '': {
@@ -41,7 +31,7 @@ Fields:
 
 - ThumbnailerSerializer
 - ThumbnailerListSerializer
-- ThumbnailerJSONSerializer (formerly ThumbnailerListSerializer)
+- ThumbnailerJSONSerializer
 
 ThumbnailerSerializer
 *********************
@@ -50,7 +40,7 @@ You can use ``ThumbnailerSerializer`` to get image's predefined alias. You need 
 
 Example:
 
-::
+.. code-block:: python
 
     from rest_framework import serializers
     from easy_thumbnails_rest.serializers import ThumbnailerSerializer
@@ -73,7 +63,7 @@ If you don't understand where to find target, please see the structure of the ``
 
 Example:
 
-::
+.. code-block:: python
 
     from rest_framework import serializers
     from easy_thumbnails_rest.serializers import ThumbnailerListSerializer
@@ -96,7 +86,7 @@ If you don't understand where to find target, please see the structure of the ``
 
 Example:
 
-::
+.. code-block:: python
 
     from rest_framework import serializers
     from easy_thumbnails_rest.serializers import ThumbnailerJSONSerializer

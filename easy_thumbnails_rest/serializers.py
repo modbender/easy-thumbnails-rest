@@ -20,7 +20,7 @@ def get_url(request, instance, alias=None):
 
 def image_sizes(request, instance, alias_obj, alias_key):
     if alias_key not in alias_obj:
-        raise KeyError('Key %s not found in dict thumbnail aliases'%alias_key)
+        raise KeyError('Key %s not found in dict thumbnail aliases' % alias_key)
     i_sizes = list(alias_obj[alias_key].keys())
     return {
         'original': get_url(request, instance),
