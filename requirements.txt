@@ -1,0 +1,7 @@
+asgiref==3.2.10
+Django==2.2.15
+djangorestframework==3.11.1
+easy-thumbnails==2.7
+Pillow==7.2.0
+pytz==2020.1
+sqlparse==0.3.1
