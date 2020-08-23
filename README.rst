@@ -8,6 +8,7 @@ Easy Thumbnails Rest
     :target: https://pepy.tech/project/easy-thumbnails-rest/month
 .. image:: https://pepy.tech/badge/easy-thumbnails-rest/week
     :target: https://pepy.tech/project/easy-thumbnails-rest/week
+.. image:: https://img.shields.io/github/license/modbender/easy-thumbnails-rest
 
 Easy Thumbnails Fields for Django Rest API Framework
 
