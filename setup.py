@@ -1,15 +1,14 @@
 import setuptools
-from readme_renderer import rst
 
-README = open('README.rst').read()
+README = open('README.md').read()
 
 setuptools.setup(
     name='easy-thumbnails-rest',
-    version='1.0.6',
+    version='1.1',
     url='https://github.com/modbender/easy-thumbnails-rest',
     description='Easy Thumbnails Fields for Django Rest API',
     long_description=README,
-    long_description_content_type='text/x-rst',
+    long_description_content_type='text/markdown',
     author='Yashas H R',
     author_email='rameshmamathayashas@gmail.com',
     install_requires=[

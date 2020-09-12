@@ -35,7 +35,7 @@ class ThumbnailerSerializer(ApiImageField):
 
     def to_representation(self, instance):
         if self.alias or self.alias == '':
-            return get_url(request, instance, self.alias)
+            return get_url(self.context['request'], instance, self.alias)
         return super().to_representation(instance)
 
 # class ThumbnailerFilterSerializer(ImageField):
