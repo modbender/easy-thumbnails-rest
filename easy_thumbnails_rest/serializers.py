@@ -34,7 +34,7 @@ class ThumbnailerSerializer(ApiImageField):
         super(ThumbnailerSerializer, self).__init__(**kwargs)
 
     def to_representation(self, instance):
-        if self.alias or self.alias == '':
+        if bool(instance) and (self.alias or self.alias == ''):
             return get_url(self.context['request'], instance, self.alias)
         return super().to_representation(instance)
 
@@ -56,7 +56,7 @@ class ThumbnailerListSerializer(ApiImageField):
         super(ThumbnailerListSerializer, self).__init__(**kwargs)
 
     def to_representation(self, instance):
-        if self.alias or self.alias == '':
+        if bool(instance) and (self.alias or self.alias == ''):
             return list(image_sizes(self.context['request'], instance, self.alias_obj, self.alias).values())
         return []
 
