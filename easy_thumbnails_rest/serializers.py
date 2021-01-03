@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db.models import ImageField
+from django.db.models.fields.files import ImageFieldFile
 from rest_framework.serializers import ImageField as ApiImageField, ListField, JSONField
 from easy_thumbnails.files import ThumbnailerImageFieldFile, get_thumbnailer
 
@@ -11,7 +12,7 @@ def get_url(request, instance, alias=None):
     if alias is not None:
         if isinstance(instance, ThumbnailerImageFieldFile):
             return request.build_absolute_uri(instance[alias].url)
-        elif isinstance(instance, ImageField):
+        elif isinstance(instance, ImageField) or isinstance(instance, ImageFieldFile):
             return request.build_absolute_uri(get_thumbnailer(instance)[alias].url)
     elif alias is None:
         return request.build_absolute_uri(instance.url)
