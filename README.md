@@ -11,9 +11,12 @@ Easy Thumbnails Fields for Django Rest API Framework
 `pip install easy-thumbnails-rest`
 
 ## Usage
-Remember that this app needs `THUMBNAIL_ALIASES` to be defined in `settings.py`
+This package is an extension for [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails).
 
-If not yet added, please check [Easy Thumbnails Docs](https://easy-thumbnails.readthedocs.io/en/latest/usage/#thumbnail-aliases) to add it.
+Please make sure to have `THUMBNAIL_ALIASES` defined in `settings.py`.
+If not added, please check [Easy Thumbnails Docs](https://easy-thumbnails.readthedocs.io/en/latest/usage/#thumbnail-aliases) to add it.
+
+To use the serializer fields provided by this package you need to have your image fields defined as provided here: [easy-thumbnails fields](https://github.com/SmileyChris/easy-thumbnails#fields)
 
 Example `settings.THUMBNAIL_ALIASES`
 
