@@ -1,5 +1,5 @@
 asgiref==3.2.10
-Django==2.2.20
+Django==2.2.21
 djangorestframework==3.11.2
 easy-thumbnails==2.7
 Pillow==8.1.1
