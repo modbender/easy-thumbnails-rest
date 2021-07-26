@@ -10,6 +10,8 @@ Easy Thumbnails Fields for Django Rest API Framework
 
 `pip install easy-thumbnails-rest`
 
+Tested on Django 2.2, 3.1, 3.2
+
 ## Usage
 This package is an extension for [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails).
 

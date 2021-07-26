@@ -4,7 +4,7 @@ README = open('README.md').read()
 
 setuptools.setup(
     name='easy-thumbnails-rest',
-    version='1.1.2',
+    version='1.1.3',
     url='https://github.com/modbender/easy-thumbnails-rest',
     description='Easy Thumbnails Fields for Django Rest API',
     long_description=README,
@@ -12,9 +12,9 @@ setuptools.setup(
     author='Yashas H R',
     author_email='rameshmamathayashas@gmail.com',
     install_requires=[
-        'django',
-        'djangorestframework',
-        'easy-thumbnails',
+        'django>=2.2.24',
+        'djangorestframework>=3.11.1',
+        'easy-thumbnails>=2.7',
     ],
     python_requires='>=3.5',
     platforms=['any'],
