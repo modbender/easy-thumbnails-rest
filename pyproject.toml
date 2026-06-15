@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "easy-thumbnails-rest"
+version = "1.2.0"
+description = "Easy Thumbnails serializer fields for the Django REST Framework"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Yashas H R", email = "rameshmamathayashas@gmail.com" },
+]
+keywords = ["django", "djangorestframework", "drf", "easy-thumbnails", "thumbnails", "serializer", "rest"]
+dependencies = [
+    "django>=4.2",
+    "djangorestframework>=3.14",
+    "easy-thumbnails>=2.8",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/modbender/easy-thumbnails-rest"
+Documentation = "https://modbender.in/easy-thumbnails-rest/"
+Repository = "https://github.com/modbender/easy-thumbnails-rest"
+Issues = "https://github.com/modbender/easy-thumbnails-rest/issues"
+
+[tool.setuptools.packages.find]
+include = ["easy_thumbnails_rest*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+test = [
+    "pytest>=7",
+    "pytest-django>=4",
+    "Pillow>=9",
+]

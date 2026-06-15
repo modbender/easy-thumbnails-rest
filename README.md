@@ -4,13 +4,17 @@
 [![Downloads](https://pepy.tech/badge/easy-thumbnails-rest/month)](https://pepy.tech/project/easy-thumbnails-rest/month)
 [![Downloads](https://pepy.tech/badge/easy-thumbnails-rest/week)](https://pepy.tech/project/easy-thumbnails-rest/week)
 
-Easy Thumbnails Fields for Django Rest API Framework
+Easy Thumbnails serializer fields for the Django REST Framework.
+
+## Documentation
+
+Full documentation: **https://modbender.in/easy-thumbnails-rest/**
 
 ## Installation
 
 `pip install easy-thumbnails-rest`
 
-Tested on Django 2.2, 3.1, 3.2
+Supports Python 3.9+, Django 4.2+ (4.2, 5.x, 6.0), Django REST Framework 3.14+, and easy-thumbnails 2.8+.
 
 ## Usage
 This package is an extension for [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails).
@@ -96,6 +100,6 @@ class ExampleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExampleModel
-          fields = '__all__'
+        fields = '__all__'
 ```
-From the above example the field `image` will contain list of key-value pair where key's are the alias under the given target and values are the respective image url.
+From the above example the field `image` will contain a dict of key-value pairs where the keys are the aliases under the given target and the values are the respective image URLs.
